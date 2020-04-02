@@ -22,11 +22,11 @@ export default {
   },
   data(){
     return{
-      myproduct:{
-        id:'1',
-        title:'T-Shirt',
-        price:'200',
-      },
+      // myproduct:{
+      //   id:'1',
+      //   title:'T-Shirt',
+      //   price:'200',
+      // },
       carts:this.$state.cart
     }
   },
