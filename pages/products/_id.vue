@@ -18,6 +18,9 @@
           <img ref="inner">
       </div>
    </main>
+   <!-- <no-ssr> -->
+        <notifications group="cart"/>
+   <!-- </no-ssr> -->
 </div>
 </template>
 
@@ -35,10 +38,16 @@ export default {
     methods: {
         addtocart(){
             this.$state.cart = [...this.$state.cart,this.product]
+            this.$notify({
+                'group':'cart',
+                'title':'Message',
+                'text':'Successfully Added to cart!',
+                'classes':['myalert']
+            })
         },
         modalShow(){
             this.$refs.modal.style.display = "block"
-            this.$refs.inner.src = this.product.image
+           this.$refs.inner.src = this.product.image
         },
         getPos(e){
            this.$refs.inner.style.transform=`translate(${-e.clientX}px,${-e.clientY}px)`
@@ -76,5 +85,8 @@ export default {
     /* width: 130%;
     height:130%;
     background-size: cover; */
+}
+.myalert{
+
 }
 </style>

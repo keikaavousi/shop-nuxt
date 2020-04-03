@@ -25,7 +25,21 @@
       },
        methods: {
         addtocart(){
-            this.$state.cart = [...this.$state.cart,this.product]
+            
+            let finded = this.$state.cart.find(n=>{
+              return n.id == this.product.id
+            })
+
+            if(!finded){
+             this.$state.cart = [...this.$state.cart,{id:this.product.id,price:this.product.price,quantity:1}]
+            }
+
+
+
+            console.log(this.$state.cart)
+
+
+            //this.$state.cart = [...this.$state.cart,this.product]
         }
     }
   }
