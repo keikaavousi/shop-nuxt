@@ -1,5 +1,5 @@
 <template>
-  <input type="number" :value="quantity" @click="handleNum">
+  <input type="number" v-model="quan" min="1" @change="handleNum">
 </template>
 
 <script>
@@ -8,13 +8,17 @@ export default {
     props:['quantity','id'],
     data(){
         return{
-            quan:this.quantity,
-            i:this.id
+            quan : this.quantity,
+            i : this.id
         }
     },
     methods: {
-        handleNum(e){
-            console.log(e.target.value,this.id)
+        handleNum(){
+                let finded_index = this.$state.cart.findIndex(n=>{
+                    return n.id == this.i
+                })
+                this.$state.cart[finded_index].quantity = this.quan
+                console.log(this.$state.cart)
         }
     },
 }

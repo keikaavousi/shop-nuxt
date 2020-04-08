@@ -10,26 +10,24 @@
               <th>quantity</th>
             </tr>
         </thead>
-          <tr v-for="cart in carts" :key="cart.id">
+          <tr v-for="cart in this.$state.cart" :key="cart.id">
             <tablecell :txt="cart.id"/>
-            <tablecell :txt="cart.image"/>
+            <tablecell :url="cart.image"/>
             <tablecell :txt="cart.title"/>
             <tablecell :txt="cart.price"/>
             <tablecell><inp :quantity="cart.quantity" :id="cart.id"/></tablecell>
-            <!-- <td>{{cart.id}}</td>
-            <td><img :src="cart.image"></td>
-            <td>{{cart.title}}</td>
-            <td>{{cart.price}}</td>
-            <td><input min="1" type="number" @change="handleNum(cart.id)" :value="cart.quantity"></td> -->
+            <tablecell><cancel @removeitem="handleRemove(cart.id)" /></tablecell>
           </tr>
       </table>
-      <h3>Total:{{total}}</h3>
+      <h3>Total:{{total.toFixed(2)}}$</h3>
+      <button @click="removeAll">Remove All</button>
   </div>
 </template>
 
 <script>
 import tablecell from '../components/tablecell'
 import inp from '../components/inp'
+import cancel from '../components/cancel'
 
 export default {
   data(){
@@ -39,18 +37,30 @@ export default {
   },
   components:{
     tablecell,
-    inp
+    inp,
+    cancel
   },
+  props:['removeitem'],
   computed: {
       total(){
           return this.$state.cart.reduce((prev,cur)=>{
-              return prev+Number(cur.price)
+              return prev+Number(cur.price*cur.quantity)
           },0)
       }
   },
+  mounted(){
+      if(this.$state.cart.length==0 && localStorage.getItem('cart')!=null){
+          this.$state.cart = JSON.parse(localStorage.getItem('cart'))
+      }
+  },
   methods: {
-    handleNum(id){
-        console.log(id)
+    handleRemove(id){
+        this.$state.cart = this.$state.cart.filter(n=> n.id !=id)
+        localStorage.setItem('cart',this.$state.cart)
+    },
+    removeAll(){
+      this.$state.cart = []
+      localStorage.setItem('cart',this.$state.cart)
     }
   },
 }

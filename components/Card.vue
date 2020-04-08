@@ -31,8 +31,10 @@
             })
 
             if(!finded){
-             this.$state.cart = [...this.$state.cart,{id:this.product.id,price:this.product.price,quantity:1}]
+             this.$state.cart = [...this.$state.cart,{id:this.product.id,title:this.product.title,image:this.product.image,price:this.product.price,quantity:1}]
+            localStorage.setItem('cart',JSON.stringify(this.$state.cart))
             }
+
 
 
 

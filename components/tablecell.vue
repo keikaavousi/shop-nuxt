@@ -1,5 +1,6 @@
 <template>
     <td>{{txt}}
+        <img :src="url">
         <slot></slot>
     </td>
 </template>
@@ -7,7 +8,7 @@
 <script>
 export default {
     name:'tablecell',
-    props:['txt']
+    props:['txt','url']
 }
 </script>
 

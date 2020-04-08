@@ -16,7 +16,7 @@ export default {
     Card
   },
   asyncData(context) {
-      return fetch(`https://fakestoreapi.herokuapp.com/products`)
+      return fetch(`https://fakestoreapi.com/products`)
       .then(res=>res.json())
       .then(rs => {
         return{

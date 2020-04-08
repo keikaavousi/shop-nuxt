@@ -27,7 +27,7 @@
 <script>
 export default {
     asyncData(context) {
-        return fetch(`https://fakestoreapi.herokuapp.com/products/${context.params.id}`)
+        return fetch(`https://fakestoreapi.com/products/${context.params.id}`)
         .then(res=>res.json())
         .then(product=>{
             return{
@@ -44,6 +44,7 @@ export default {
                 'text':'Successfully Added to cart!',
                 'classes':['myalert']
             })
+            localStorage.setItem('cart',JSON.stringify(this.$state.cart))
         },
         modalShow(){
             this.$refs.modal.style.display = "block"
