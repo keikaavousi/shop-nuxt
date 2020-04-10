@@ -1,8 +1,11 @@
 <template>
   <div class="container-fluid">
     <main class="row">
+      <div class="col-md-12">
+      <searchInput/>
+      </div>
       <!-- <Card :product="myproduct" /> -->
-      <Card v-for="product in products" :key="product.id" :product="product"/>
+      <Card v-for="product in this.$state.products" :key="product.id" :product="product" />
     </main>
   </div>
 </template>
@@ -10,20 +13,19 @@
 <script>
 
 import Card from '@/components/Card'
-
+import searchInput from '@/components/searchInput'
 export default {
   components:{
-    Card
+    Card,
+    searchInput
   },
-  asyncData(context) {
+   asyncData(context) {
       return fetch(`https://fakestoreapi.com/products`)
       .then(res=>res.json())
-      .then(rs => {
-        return{
-          products:rs
-        }
+      .then(rs =>{ 
+        return context.$state.products = rs 
       })
-  },
+   },
   data(){
     return{
       // myproduct:{
@@ -45,7 +47,7 @@ export default {
   align-items: center;
   text-align: center;
 }
-main{
-  padding-top:200px
+main {
+  padding-top: 200px;
 }
 </style>
