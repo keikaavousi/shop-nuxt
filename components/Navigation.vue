@@ -18,6 +18,9 @@
         <nuxt-link to="/search">Search</nuxt-link>
       </li>
       <li>
+        <nuxt-link to="/contact">Contact</nuxt-link>
+      </li>
+      <li>
           <nuxt-link to="/">
                 <span class="badge badge-success">{{this.$state.cart.length}}</span>
           </nuxt-link>
