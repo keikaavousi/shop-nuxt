@@ -30,7 +30,7 @@ export default {
            name:'' ,
            family:'',
            gender:'',
-           chck:'val1',
+           chck:[],
            personCity:'',
            cities:['tehran','shiraz','esfahan'],
            msg:''
